@@ -61,6 +61,8 @@ protected:
 
     G4double env_sizeXY, env_sizeZ,
             world_sizeXY, world_sizeZ;
+
+
     G4Material *world_mat = nullptr,
             *env_mat = nullptr,
             *radiator_mat = nullptr;

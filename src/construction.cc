@@ -95,18 +95,18 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
     //Radiator
 
     G4double plate_sizeXY = 10 * cm, plate_sizeZ = 1 * cm;
-    G4Material *plate_mat = nist->FindOrBuildMaterial("G4_Al");
+
     solidRadiator =
             new G4Box("solidRadiator",                    //its name
                       0.5 * plate_sizeXY, 0.5 * plate_sizeXY, 0.5 * plate_sizeZ); //its size
 
     logicRadiator =
             new G4LogicalVolume(solidRadiator,            //its solid
-                                plate_mat,             //its material
+                                radiator_mat,             //its material
                                 "logicRadiator");         //its name
 
     new G4PVPlacement(0,                       //no rotation
-                      G4ThreeVector(0, 0, -30 * cm),         //at (0,0,0)
+                      G4ThreeVector(0, 0, 20 * cm),         //at (0,0,0)
                       logicRadiator,                //its logical volume
                       "physRadiator",              //its name
                       logicEnv,              //its mother  volume
