@@ -51,11 +51,3 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-
-//Clipul2_3_first
-
-// ./sim ->G4Backtrace is activated 
-
-// . software/geant4/geant4-v11.0.2-install/share/Geant4-11.0.2/geant4make/geant4make.sh ->activare librarii G4
-// cmake .. -> for build files(config. + generating)
-//make -> for compile and scanning (build target)
