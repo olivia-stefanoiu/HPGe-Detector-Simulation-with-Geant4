@@ -9,7 +9,7 @@
 /vis/drawVolume
 
 # Specify view angle:
-/vis/viewer/set/viewpointVector -1 0 0
+/vis/viewer/set/viewpointVector 3 3 3
 /vis/viewer/set/lightsVector -1 0 0
 
 # Specify style (surface, wireframe, auxiliary edges,...)
@@ -49,12 +49,17 @@
 
 
 #Germanium Crystal
-/vis/geometry/set/colour logicGeUnion 0 192 192 192 .1
+/vis/geometry/set/colour logicGeUnion 0 192 192 192 .3
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
 #Bor
-/vis/geometry/set/colour logicBor 0 0 0 0 .1
+#/vis/geometry/set/colour logicBor 0 0 0 0 .1
+#/vis/viewer/set/style surface
+#/vis/viewer/set/hiddenMarker true
+
+#Bor
+/vis/geometry/set/colour logicBorUnion 0 0 0 0 .1
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
