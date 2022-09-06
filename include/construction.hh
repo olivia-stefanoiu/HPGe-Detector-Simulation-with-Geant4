@@ -15,6 +15,7 @@
 #include "G4NistManager.hh"
 #include "G4GenericMessenger.hh"
 #include "G4Material.hh"
+#include "G4MultiUnion.hh"
 
 #include "detector.hh"
 

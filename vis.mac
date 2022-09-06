@@ -27,16 +27,11 @@
 
 /vis/scene/endOfEventAction accumulate
 
-# Name
-/vis/set/textColour green
-/vis/set/textLayout right
-/vis/set/textLayout    # Revert to normal (left adjusted) layout
-/vis/set/textColour    # Revert to default text colour (blue)
+
 
 # Axes, scale, etc.
 /vis/scene/add/scale   # Simple scale line
-#/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
-
+/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
 
 
 /vis/geometry/set/visibility World 0 false
@@ -48,15 +43,15 @@
 
 
 # Copper
-/vis/geometry/set/colour logicCu 0 1 0 0 .3
-/vis/viewer/set/style surface
-/vis/viewer/set/hiddenMarker true
+#/vis/geometry/set/colour logicCu 0 1 0 0 .3
+#/vis/viewer/set/style surface
+#/vis/viewer/set/hiddenMarker true
 
 
 #Germanium Crystal 1
-/vis/geometry/set/colour logicGe 0 0 1 0 .1
-/vis/viewer/set/style surface
-/vis/viewer/set/hiddenMarker true
+#/vis/geometry/set/colour logicGe 0 0 1 0 .1
+#/vis/viewer/set/style surface
+#/vis/viewer/set/hiddenMarker true
 
 
 # Re-establish auto refreshing and verbosity:

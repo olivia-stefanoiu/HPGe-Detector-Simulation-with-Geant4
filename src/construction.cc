@@ -146,6 +146,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        54.35*mm,
                        0.*deg,
                        360.*deg);
+    /*
     logicGe =
             new G4LogicalVolume(solidGe,
                                 nist->FindOrBuildMaterial("G4_Ge"),
@@ -159,7 +160,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       false,
                       0,
                       checkOverlaps);
-
+    */
     solidGeFill =
             new G4Tubs("solidGeFill",
                        0,
@@ -167,7 +168,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        6.2*mm,
                        0.*deg,
                        360.*deg);
-
+    /*
     logicGeFill =
             new G4LogicalVolume(solidGeFill,
                                 nist->FindOrBuildMaterial("G4_Ge"),
@@ -181,7 +182,33 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       false,
                       0,
                       checkOverlaps);
+    */
+    auto *solidGeUnion =
+            new G4MultiUnion("solidGeUnion");
+    G4ThreeVector pos = G4ThreeVector ();
+    G4RotationMatrix rot=G4RotationMatrix ();
+    G4Transform3D tr= G4Transform3D(rot,pos);
+    solidGeUnion->AddNode(*solidGe,tr);
 
+    G4ThreeVector pos_fill = G4ThreeVector (0,0,-48.15*mm);
+    G4RotationMatrix rot_fill=G4RotationMatrix ();
+    G4Transform3D tr_fill= G4Transform3D(rot_fill,pos_fill);
+    solidGeUnion->AddNode(*solidGeFill,tr_fill);
+
+    solidGeUnion->Voxelize();
+
+    auto *logicGeUnion=
+            new G4LogicalVolume(solidGeUnion,
+                                nist->FindOrBuildMaterial("G4_Ge"),
+                                "logicGeUnion");
+    new G4PVPlacement(0,
+                      G4ThreeVector(),
+                      logicGeUnion,
+                      "physGeUnion",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
 
     return physWorld;
 }
@@ -189,9 +216,8 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 void MyDetectorConstruction::ConstructSDandField()
 {
     auto *sensDet = new MySensitiveDetector("SensitiveDetector");
-
-
-    if(logicGe!= NULL)
+    
+    if(logicGe!= nullptr)
         logicGe->SetSensitiveDetector(sensDet);
 
 }
