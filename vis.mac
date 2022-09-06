@@ -53,10 +53,10 @@
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
-#Bor
-#/vis/geometry/set/colour logicBor 0 0 0 0 .1
-#/vis/viewer/set/style surface
-#/vis/viewer/set/hiddenMarker true
+#Germanium Inactive
+/vis/geometry/set/colour logicInactiveGe 0 0 1 0 .3
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenMarker true
 
 #Bor
 /vis/geometry/set/colour logicBorUnion 0 0 0 0 .1

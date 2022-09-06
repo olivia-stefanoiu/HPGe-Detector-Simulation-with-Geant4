@@ -48,9 +48,8 @@ protected:
             *logicRadiator = nullptr,
             *logicCu = nullptr,
             *logicGeUnion = nullptr,
-            *logicBor= nullptr,
-            *logicBorFill= nullptr,
-            *logicBorUnion= nullptr;
+            *logicBorUnion= nullptr,
+            *logicInactiveGe= nullptr;
 
     G4Box *solidRadiator = nullptr,
             *solidWorld = nullptr,
@@ -60,7 +59,8 @@ protected:
             *solidGe = nullptr,
             *solidGeFill = nullptr,
             *solidBor = nullptr,
-            *solidBorFill= nullptr;
+            *solidBorFill= nullptr,
+            *solidInactiveGe= nullptr;
 
     G4GenericMessenger *fMessenger;
 

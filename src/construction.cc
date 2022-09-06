@@ -8,6 +8,11 @@ MyDetectorConstruction::MyDetectorConstruction() {
     world_sizeXY = 1.2 * env_sizeXY;
     world_sizeZ = 1.2 * env_sizeZ;
 
+    fMessenger = new G4GenericMessenger(this, "/detector/", "Detector Construction");
+    fMessenger->DeclareMethod("changePlate",
+                              &MyDetectorConstruction::ResetRadiator,
+                              "Change Material and thickness of plate");
+
 }
 
 MyDetectorConstruction::~MyDetectorConstruction() {
@@ -42,7 +47,6 @@ void MyDetectorConstruction::DefineMaterials() {
 }
 
 
-
 G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
     G4NistManager *nist = G4NistManager::Instance();
@@ -50,8 +54,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
     // World
     //
-
-      solidWorld =
+    solidWorld =
             new G4Box("World",                       //its name
                       0.5 * world_sizeXY, 0.5 * world_sizeXY, 0.5 * world_sizeZ);     //its size
 
@@ -119,17 +122,17 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
     //
     solidCu =
             new G4Tubs("solidCu",
-                       0*mm,
-                       1.7*mm,
-                       48.15*mm,
-                       0.*deg,
-                       360.*deg);
+                       0 * mm,
+                       1.7 * mm,
+                       48.15 * mm,
+                       0. * deg,
+                       360. * deg);
     logicCu =
             new G4LogicalVolume(solidCu,
                                 nist->FindOrBuildMaterial("G4_Cu"),
                                 "logicCu");
     new G4PVPlacement(0,
-                      G4ThreeVector(0,0,6.2*mm),
+                      G4ThreeVector(0, 0, 6.2 * mm),
                       logicCu,
                       "physCu",
                       logicEnv,
@@ -139,38 +142,38 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
     //Germanium Crystal
     //
-
     solidGe =
             new G4Tubs("solidGe",
-                       5.1*mm,
-                       41.0*mm,
-                       54.35*mm,
-                       0.*deg,
-                       360.*deg);
+                       5.1 * mm,
+                       41.0 * mm,
+                       54.35 * mm,//problema,  trebuie sa tai 2 doar din capat, fix, lipesc peste
+                       0. * deg,
+                       360. * deg);
 
     solidGeFill =
             new G4Tubs("solidGeFill",
                        0,
-                       5.1*mm,
-                       6.2*mm,
-                       0.*deg,
-                       360.*deg);
+                       5.1 * mm,
+                       6.2 * mm,
+                       0. * deg,
+                       360. * deg);
 
     solidGeUnion =
             new G4MultiUnion("solidGeUnion");
-    G4ThreeVector pos_Ge = G4ThreeVector ();
-    G4RotationMatrix rot_Ge=G4RotationMatrix ();
-    G4Transform3D tr_Ge= G4Transform3D(rot_Ge,pos_Ge);
-    solidGeUnion->AddNode(*solidGe,tr_Ge);
+    G4ThreeVector pos_Ge = G4ThreeVector();
+    G4RotationMatrix rot_Ge = G4RotationMatrix();
+    G4Transform3D tr_Ge = G4Transform3D(rot_Ge, pos_Ge);
+    solidGeUnion->AddNode(*solidGe, tr_Ge);
 
-    G4ThreeVector pos_GeFill = G4ThreeVector (0,0,-48.15*mm);//fill sunt partile de care am nevoie pentru figurii custom
-    G4RotationMatrix rot_GeFill=G4RotationMatrix ();
-    G4Transform3D tr_GeFill= G4Transform3D(rot_GeFill,pos_GeFill);
-    solidGeUnion->AddNode(*solidGeFill,tr_GeFill);
+    G4ThreeVector pos_GeFill = G4ThreeVector(0, 0,
+                                             -48.15 * mm);//fill sunt partile de care am nevoie pentru figurii custom
+    G4RotationMatrix rot_GeFill = G4RotationMatrix();
+    G4Transform3D tr_GeFill = G4Transform3D(rot_GeFill, pos_GeFill);
+    solidGeUnion->AddNode(*solidGeFill, tr_GeFill);
 
     solidGeUnion->Voxelize();
 
-    logicGeUnion=//pare ca bucata de fill e cam defazata dar nu are de ce
+    logicGeUnion =//pare ca bucata de fill e cam defazata dar nu are de ce
             new G4LogicalVolume(solidGeUnion,
                                 nist->FindOrBuildMaterial("G4_Ge"),
                                 "logicGeUnion");
@@ -183,68 +186,61 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,
                       checkOverlaps);
 
+    solidInactiveGe =//-53.35
+            new G4Tubs("solidInactiveGe",
+                       0,
+                       41. * mm,
+                       1 * mm,
+                       0 * deg,
+                       360. * deg);
+
+    logicInactiveGe =
+            new G4LogicalVolume(solidInactiveGe,
+                                nist->FindOrBuildMaterial("G4_Ge"),
+                                "logicInactiveGe");
+    new G4PVPlacement(0,
+                      G4ThreeVector(0, 0, -53.35 * mm),
+                      logicInactiveGe,
+                      "physInactiveGe",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+
 
     //Boron Contact
     //
     solidBor =
             new G4Tubs("solidBor",
-                       5.0997*mm,
-                       5.1*mm,
-                       48.15*mm,
-                       0.*deg,
-                       360.*deg);
-    /*
-    logicBor =
-            new G4LogicalVolume(solidBor,
-                                nist->FindOrBuildMaterial("G4_B"),
-                                "logicBor");
-    new G4PVPlacement(0,
-                      G4ThreeVector(0,0,6.2*mm),
-                      logicBor,
-                      "physBor",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
-*/
+                       5.0997 * mm,
+                       5.1 * mm,
+                       48.15 * mm,
+                       0. * deg,
+                       360. * deg);
+
     solidBorFill =
-             new G4Tubs("solidBorFill",
-                        0,
-                        5.1*mm,
-                        0.00015,
-                        0*deg,
-                        360*deg);
-/*
-    logicBorFill =
-            new G4LogicalVolume(solidBorFill,
-                                nist->FindOrBuildMaterial("G4_B"),
-                                "logicBorFill");
+            new G4Tubs("solidBorFill",
+                       0,
+                       5.1 * mm,
+                       0.00015,
+                       0 * deg,
+                       360 * deg);
 
-    new G4PVPlacement(0,
-                      G4ThreeVector(0,0,-41.94985*mm),
-                      logicBorFill,
-                      "physBor",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
-
-*/
     solidBorUnion =
             new G4MultiUnion("solidBorUnion");
-    G4ThreeVector pos_Bor = G4ThreeVector (0,0,6.2*mm);
-    G4RotationMatrix rot_Bor=G4RotationMatrix ();
-    G4Transform3D trBor= G4Transform3D(rot_Bor,pos_Bor);
-    solidBorUnion->AddNode(*solidBor,trBor);
+    G4ThreeVector pos_Bor = G4ThreeVector(0, 0, 6.2 * mm);
+    G4RotationMatrix rot_Bor = G4RotationMatrix();
+    G4Transform3D trBor = G4Transform3D(rot_Bor, pos_Bor);
+    solidBorUnion->AddNode(*solidBor, trBor);
 
-    G4ThreeVector pos_BorFill = G4ThreeVector (0,0,-41.94985*mm);
-    G4RotationMatrix rot_BorFill=G4RotationMatrix ();
-    G4Transform3D tr_BorFill= G4Transform3D(rot_BorFill,pos_BorFill);
-    solidBorUnion->AddNode(*solidBorFill,tr_BorFill);
+    G4ThreeVector pos_BorFill = G4ThreeVector(0, 0, -41.94985 * mm);
+    G4RotationMatrix rot_BorFill = G4RotationMatrix();
+    G4Transform3D tr_BorFill = G4Transform3D(rot_BorFill, pos_BorFill);
+    solidBorUnion->AddNode(*solidBorFill, tr_BorFill);
 
     solidBorUnion->Voxelize();
 
-    logicBorUnion=
+    logicBorUnion =
             new G4LogicalVolume(solidBorUnion,
                                 nist->FindOrBuildMaterial("G4_B"),
                                 "logicBorUnion");
@@ -258,15 +254,13 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       checkOverlaps);
 
 
-
     return physWorld;
 }
 
-void MyDetectorConstruction::ConstructSDandField()
-{
+void MyDetectorConstruction::ConstructSDandField() {
     auto *sensDet = new MySensitiveDetector("SensitiveDetector");
-    
-    if(logicGeUnion!= nullptr)
+
+    if (logicGeUnion != nullptr)
         logicGeUnion->SetSensitiveDetector(sensDet);
 
 }
