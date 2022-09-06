@@ -146,21 +146,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        54.35*mm,
                        0.*deg,
                        360.*deg);
-    /*
-    logicGe =
-            new G4LogicalVolume(solidGe,
-                                nist->FindOrBuildMaterial("G4_Ge"),
-                                "logicGe");
 
-    new G4PVPlacement(0,
-                      G4ThreeVector(),
-                      logicGe,
-                      "physGe",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
-    */
     solidGeFill =
             new G4Tubs("solidGeFill",
                        0,
@@ -168,22 +154,8 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        6.2*mm,
                        0.*deg,
                        360.*deg);
-    /*
-    logicGeFill =
-            new G4LogicalVolume(solidGeFill,
-                                nist->FindOrBuildMaterial("G4_Ge"),
-                                "logicGeFill");
 
-    new G4PVPlacement(0,
-                      G4ThreeVector(0*mm,0.*mm,-48.15*mm),
-                      logicGeFill,
-                      "physGeFill",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
-    */
-    auto *solidGeUnion =
+    solidGeUnion =
             new G4MultiUnion("solidGeUnion");
     G4ThreeVector pos = G4ThreeVector ();
     G4RotationMatrix rot=G4RotationMatrix ();
@@ -197,7 +169,9 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
     solidGeUnion->Voxelize();
 
-    auto *logicGeUnion=
+
+
+    logicGeUnion=
             new G4LogicalVolume(solidGeUnion,
                                 nist->FindOrBuildMaterial("G4_Ge"),
                                 "logicGeUnion");
@@ -210,6 +184,29 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,
                       checkOverlaps);
 
+
+    //Boron Contact
+    //
+    solidBor =
+            new G4Tubs("solidBor",
+                       5.0997*mm,
+                       5.1*mm,
+                       48.15*mm,
+                       0.*deg,
+                       360.*deg);
+    logicBor =
+            new G4LogicalVolume(solidBor,
+                                nist->FindOrBuildMaterial("G4_B"),
+                                "logicBor");
+    new G4PVPlacement(0,
+                      G4ThreeVector(0,0,6.2*mm),
+                      logicBor,
+                      "physBor",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+
     return physWorld;
 }
 
@@ -217,8 +214,8 @@ void MyDetectorConstruction::ConstructSDandField()
 {
     auto *sensDet = new MySensitiveDetector("SensitiveDetector");
     
-    if(logicGe!= nullptr)
-        logicGe->SetSensitiveDetector(sensDet);
+    if(logicGeUnion!= nullptr)
+        logicGeUnion->SetSensitiveDetector(sensDet);
 
 }
 

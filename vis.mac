@@ -31,7 +31,7 @@
 
 # Axes, scale, etc.
 /vis/scene/add/scale   # Simple scale line
-/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
+#/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
 
 
 /vis/geometry/set/visibility World 0 false
@@ -43,16 +43,20 @@
 
 
 # Copper
-#/vis/geometry/set/colour logicCu 0 1 0 0 .3
-#/vis/viewer/set/style surface
-#/vis/viewer/set/hiddenMarker true
+/vis/geometry/set/colour logicCu 0 255 140 0 .3
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenMarker true
 
 
-#Germanium Crystal 1
-#/vis/geometry/set/colour logicGe 0 0 1 0 .1
-#/vis/viewer/set/style surface
-#/vis/viewer/set/hiddenMarker true
+#Germanium Crystal
+/vis/geometry/set/colour logicGeUnion 0 192 192 192 .1
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenMarker true
 
+#Bor
+/vis/geometry/set/colour logicBor 0 0 0 0 .1
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenMarker true
 
 # Re-establish auto refreshing and verbosity:
 /vis/viewer/set/autoRefresh true
