@@ -254,27 +254,73 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       checkOverlaps);
     //Alluminum foil
     //
-    solidAlFoil=
+    solidAlFoil =
             new G4Tubs("solidAlFoil",
                        0,
-                       41*mm,
-                       0.0125*mm,
-                       0*deg,
-                       360*deg);
+                       41 * mm,
+                       0.0125 * mm,
+                       0 * deg,
+                       360 * deg);
 
-    logicAlFoil=
+    logicAlFoil =
             new G4LogicalVolume(solidAlFoil,
                                 nist->FindOrBuildMaterial("G4_Al"),
                                 "logicAlFoil");
 
     new G4PVPlacement(0,
-                      G4ThreeVector(0,0,-53.3625),
+                      G4ThreeVector(0, 0, -53.3625),
                       logicAlFoil,
                       "physAlFoil",
                       logicEnv,
                       false,
                       0,
                       checkOverlaps);
+
+    solidLi =
+            new G4Tubs("solidLiFoil",
+                       41 * mm,
+                       41.7 * mm,
+                       55.3625 * mm,
+                       0 * deg,
+                       360 * deg);
+
+    logicLi =
+            new G4LogicalVolume(solidLi,
+                                nist->FindOrBuildMaterial("G4_Li"),
+                                "logicLi");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(0, 0, 1.0125*mm),
+                      logicLi,
+                      "physLi",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+
+
+    solidLiFill =
+            new G4Tubs("solidLiFoil",
+                       0,
+                       41.7 * mm,
+                       0.35 * mm,
+                       0 * deg,
+                       360 * deg);
+
+    logicLiFill =
+            new G4LogicalVolume(solidLiFill,
+                                nist->FindOrBuildMaterial("G4_Li"),
+                                "logicLiFill");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(0, 0, -54.7*mm),
+                      logicLiFill,
+                      "physLiFill",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+
 
 
     return physWorld;
