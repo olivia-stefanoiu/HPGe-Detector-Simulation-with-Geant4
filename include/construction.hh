@@ -1,7 +1,6 @@
 #ifndef CONSTRUCTION_HH
 #define CONSTRUCTION_HH
 
-
 #include "G4VUserDetectorConstruction.hh"
 #include "G4SystemOfUnits.hh"
 
@@ -48,26 +47,28 @@ protected:
             *logicRadiator = nullptr,
             *logicCu = nullptr,
             *logicGeUnion = nullptr,
-            *logicBorUnion= nullptr,
-            *logicInactiveGe= nullptr,
-            *logicAlFoil= nullptr,
-            *logicLi,
-            *logicLiFill,
-            *logicLiUnion;
+            *logicBorUnion = nullptr,
+            *logicInactiveGe = nullptr,
+            *logicAlFoil = nullptr,
+            *logicLiUnion,
+            *logicAlCapUnion;
 
     G4Box *solidRadiator = nullptr,
             *solidWorld = nullptr,
             *solidEnv = nullptr;
 
-    G4Tubs *solidCu = nullptr,
+    G4Tubs
+            *solidCu = nullptr,
             *solidGe = nullptr,
             *solidGeFill = nullptr,
             *solidBor = nullptr,
-            *solidBorFill= nullptr,
-            *solidInactiveGe= nullptr,
-            *solidAlFoil= nullptr,
-            *solidLi,
-            *solidLiFill;
+            *solidBorFill = nullptr,
+            *solidInactiveGe = nullptr,
+            *solidAlFoil = nullptr,
+            *solidLi = nullptr,
+            *solidLiFill = nullptr,
+            *solidAlCap,
+            *solidAlCapFill;
 
     G4GenericMessenger *fMessenger;
 
@@ -75,13 +76,16 @@ protected:
             world_sizeXY, world_sizeZ;
 
 
-    G4Material *world_mat = nullptr,
+    G4Material
+            *world_mat = nullptr,
             *env_mat = nullptr,
             *radiator_mat = nullptr;
 
-    G4MultiUnion *solidGeUnion= nullptr,
-                 *solidBorUnion= nullptr,
-                 *solidLiUnion= nullptr;
+    G4MultiUnion
+            *solidGeUnion = nullptr,
+            *solidBorUnion = nullptr,
+            *solidLiUnion = nullptr,
+            *solidAlCapUnion;
 
 
     void DefineMaterials();

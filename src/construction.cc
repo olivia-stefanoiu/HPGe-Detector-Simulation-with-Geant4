@@ -284,21 +284,6 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        55.3625 * mm,
                        0 * deg,
                        360 * deg);
-/*
-    logicLi =
-            new G4LogicalVolume(solidLi,
-                                nist->FindOrBuildMaterial("G4_Li"),
-                                "logicLi");
-
-    new G4PVPlacement(0,
-                      G4ThreeVector(0, 0, 1.0125*mm),
-                      logicLi,
-                      "physLi",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
-*/
 
     solidLiFill =
             new G4Tubs("solidLiFoil",
@@ -307,22 +292,8 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        0.35 * mm,
                        0 * deg,
                        360 * deg);
-/*
-    logicLiFill =
-            new G4LogicalVolume(solidLiFill,
-                                nist->FindOrBuildMaterial("G4_Li"),
-                                "logicLiFill");
 
-    new G4PVPlacement(0,
-                      G4ThreeVector(0, 0, -54.7*mm),
-                      logicLiFill,
-                      "physLiFill",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
 
-    */
     solidLiUnion =
             new G4MultiUnion("solidLiUnion");
     G4ThreeVector pos_Li = G4ThreeVector(0, 0, 1.0125 * mm);
@@ -350,6 +321,56 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       false,
                       0,
                       checkOverlaps);
+
+    //Alluminum cap
+    //
+    solidAlCap =
+            new G4Tubs("solidAlCup",
+                       45.7*mm,
+                       46.7*mm,
+                       60.05*mm,
+                       0*deg,
+                       360*deg);
+
+    solidAlCapFill =
+            new G4Tubs("solidAlCupFill",
+                       0,
+                       46.7*mm,
+                       0.5*mm,
+                       0*deg,
+                       360*deg);
+
+    solidAlCapUnion =
+            new G4MultiUnion("solidAlCupUnion");
+
+    G4ThreeVector pos_AlCap = G4ThreeVector(0, 0,  7.725 * mm);
+    G4RotationMatrix rot_AlCap = G4RotationMatrix();
+    G4Transform3D tr_AlCap = G4Transform3D(rot_AlCap, pos_AlCap);
+    solidAlCapUnion->AddNode(*solidAlCap, tr_AlCap);
+
+    G4ThreeVector pos_AlCapFill = G4ThreeVector(0, 0, -59.2 * mm);//e
+    G4RotationMatrix rot_AlCapFill = G4RotationMatrix();
+    G4Transform3D tr_AlCapFill = G4Transform3D(rot_AlCapFill, pos_AlCapFill);
+    solidAlCapUnion->AddNode(*solidAlCapFill, tr_AlCapFill);
+
+    solidAlCapUnion->Voxelize();
+
+    logicAlCapUnion =
+            new G4LogicalVolume(solidAlCapUnion,
+                                nist->FindOrBuildMaterial("G4_Al"),
+                                "logicAlCapUnion");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(),
+                      logicAlCapUnion,
+                      "physAlCapUnion",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+
+
+
 
 
     return physWorld;
