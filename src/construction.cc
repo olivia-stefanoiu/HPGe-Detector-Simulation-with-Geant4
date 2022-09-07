@@ -9,9 +9,9 @@ MyDetectorConstruction::MyDetectorConstruction() {
     world_sizeZ = 1.2 * env_sizeZ;
 
     fMessenger = new G4GenericMessenger(this, "/detector/", "Detector Construction");
-    fMessenger->DeclareMethod("changePlate",
+    fMessenger->DeclareMethod("ResetRadiator",
                               &MyDetectorConstruction::ResetRadiator,
-                              "Change Material and thickness of plate");
+                              "Change Material and thickness of radiator");
 
 }
 
@@ -275,7 +275,8 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       false,
                       0,
                       checkOverlaps);
-
+    //Li
+    //
     solidLi =
             new G4Tubs("solidLiFoil",
                        41 * mm,
@@ -283,7 +284,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        55.3625 * mm,
                        0 * deg,
                        360 * deg);
-
+/*
     logicLi =
             new G4LogicalVolume(solidLi,
                                 nist->FindOrBuildMaterial("G4_Li"),
@@ -297,7 +298,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       false,
                       0,
                       checkOverlaps);
-
+*/
 
     solidLiFill =
             new G4Tubs("solidLiFoil",
@@ -306,7 +307,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        0.35 * mm,
                        0 * deg,
                        360 * deg);
-
+/*
     logicLiFill =
             new G4LogicalVolume(solidLiFill,
                                 nist->FindOrBuildMaterial("G4_Li"),
@@ -321,6 +322,34 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,
                       checkOverlaps);
 
+    */
+    solidLiUnion =
+            new G4MultiUnion("solidLiUnion");
+    G4ThreeVector pos_Li = G4ThreeVector(0, 0, 1.0125 * mm);
+    G4RotationMatrix rot_Li = G4RotationMatrix();
+    G4Transform3D tr_Li = G4Transform3D(rot_Li, pos_Li);
+    solidLiUnion->AddNode(*solidLi, tr_Li);
+
+    G4ThreeVector pos_LiFill = G4ThreeVector(0, 0, -54.7 * mm);//e -54.725 dar la vizualizare sunt probleme
+    G4RotationMatrix rot_LiFill = G4RotationMatrix();
+    G4Transform3D tr_LiFill = G4Transform3D(rot_LiFill, pos_LiFill);
+    solidLiUnion->AddNode(*solidLiFill, tr_LiFill);
+
+    solidLiUnion->Voxelize();
+
+    logicLiUnion =
+            new G4LogicalVolume(solidLiUnion,
+                                nist->FindOrBuildMaterial("G4_Li"),
+                                "logicLiUnion");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(),
+                      logicLiUnion,
+                      "physLiUnion",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
 
 
     return physWorld;

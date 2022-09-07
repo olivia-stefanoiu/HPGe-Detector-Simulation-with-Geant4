@@ -52,7 +52,8 @@ protected:
             *logicInactiveGe= nullptr,
             *logicAlFoil= nullptr,
             *logicLi,
-            *logicLiFill;
+            *logicLiFill,
+            *logicLiUnion;
 
     G4Box *solidRadiator = nullptr,
             *solidWorld = nullptr,
