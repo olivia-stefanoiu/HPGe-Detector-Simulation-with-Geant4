@@ -10,11 +10,8 @@ void MyActionInitialization::BuildForMaster() const {
 }
 
 void MyActionInitialization::Build() const {
-    //Generate the particles
-    // auto *generator = new MyPrimaryGenerator();
-    //SetUserAction(generator);
-    SetUserAction(new MyPrimaryGenerator);
 
+    SetUserAction(new MyPrimaryGenerator);
 
     auto *runAction = new MyRunAction();
     SetUserAction(runAction);

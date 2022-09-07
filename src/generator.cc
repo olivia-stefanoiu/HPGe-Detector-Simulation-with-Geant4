@@ -35,21 +35,20 @@
 
  void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
  {
-     G4ParticleDefinition* particle = fParticleGun->GetParticleDefinition();
-    //cum poate fi nul? nu se apeleaza constructorul intai?
-     if(particle == G4Geantino::Geantino())
+
+     if(fParticleGun->GetParticleDefinition() == G4Geantino::Geantino())
      {
-         G4int Z = 63; //nr de p+
-         G4int A = 152; //nr de masa
+         G4int Z = 27; //nr de p+
+         G4int A = 60; //nr de masa
 
-         G4double charge = 0.*eplus;//elementary charge
-         G4double energy = 0.*keV;
+         G4double ionCharge = 0.*eplus;//elementary charge
+         G4double excitEnergy = 0.*keV;
 
-         G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(Z, A, energy);
+         G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(Z, A, excitEnergy);
 
          fParticleGun->SetParticleDefinition(ion);
-         fParticleGun->SetParticleCharge(charge);
-         fParticleGun->SetParticleEnergy(energy);
+         fParticleGun->SetParticleCharge(ionCharge);
+
 
      }
 

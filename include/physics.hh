@@ -9,12 +9,12 @@
 #include "G4RadioactiveDecayPhysics.hh"
 
 
-class MyPhysicsList : public G4VModularPhysicsList
-{
+class MyPhysicsList : public G4VModularPhysicsList {
 
 public:
-   MyPhysicsList();
-   ~MyPhysicsList()override;
+    MyPhysicsList();
+
+    ~MyPhysicsList() override;
 
 };
 
