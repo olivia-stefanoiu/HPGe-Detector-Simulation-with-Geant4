@@ -252,6 +252,29 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       false,
                       0,
                       checkOverlaps);
+    //Alluminum foil
+    //
+    solidAlFoil=
+            new G4Tubs("solidAlFoil",
+                       0,
+                       41*mm,
+                       0.0125*mm,
+                       0*deg,
+                       360*deg);
+
+    logicAlFoil=
+            new G4LogicalVolume(solidAlFoil,
+                                nist->FindOrBuildMaterial("G4_Al"),
+                                "logicAlFoil");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(0,0,-53.3625),
+                      logicAlFoil,
+                      "physAlFoil",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
 
 
     return physWorld;
