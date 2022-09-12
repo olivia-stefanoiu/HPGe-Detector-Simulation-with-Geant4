@@ -288,22 +288,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                        0 * deg,
                        360 * deg);
 
-/*
-    logicLi =
-            new G4LogicalVolume(solidLi,
-                                nist->FindOrBuildMaterial("G4_Li"),
-                                "logicLi");
 
-    new G4PVPlacement(0,
-                      G4ThreeVector(0,0,-6.55*mm),
-                      logicLi,
-                      "physLi",
-                      logicEnv,
-                      false,
-                      0,
-                      checkOverlaps);
-
-*/
     solidLiFill =
             new G4Tubs("solidLiFill",
                        0,
@@ -334,6 +319,28 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       G4ThreeVector(),
                       logicLiUnion,
                       "physLiUnion",
+                      logicEnv,
+                      false,
+                      0,
+                      checkOverlaps);
+
+    solidAlFoil =
+            new G4Tubs("solidAlFoil",
+                       0,
+                       41.7*mm,
+                       0.0125*mm,
+                       0*deg,
+                       360*deg);
+
+    logicAlFoil =
+            new G4LogicalVolume(solidAlFoil,
+                                nist->FindOrBuildMaterial("G4_Al"),
+                                "logicAlFoil");
+
+    new G4PVPlacement(0,
+                      G4ThreeVector(0,0,-61.2625*mm),
+                      logicAlFoil,
+                      "physAlFoil",
                       logicEnv,
                       false,
                       0,

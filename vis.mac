@@ -75,6 +75,8 @@
 /vis/viewer/set/hiddenMarker true
 
 
+
+
 # Re-establish auto refreshing and verbosity:
 /vis/viewer/set/autoRefresh true
 /vis/verbose warnings
