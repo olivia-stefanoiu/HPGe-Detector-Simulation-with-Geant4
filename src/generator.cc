@@ -10,26 +10,18 @@
 
      particleName="geantino";
      G4ParticleDefinition *particle = particleTable->FindParticle(particleName);
-
-     pos=G4ThreeVector(0.,0.,0.); //position vector-in the center
-     pos_mom=G4ThreeVector(0.,0.,1.); //z direction - momentum vector
-     mom=0*GeV;
-
-     fParticleGun->SetParticlePosition(pos); //for position(in center)
-     fParticleGun->SetParticleMomentumDirection(pos_mom); //for direction
-     fParticleGun->SetParticleMomentum(mom); //for momentum... in natural units
-
      fParticleGun->SetParticleDefinition(particle);
 
+     fParticleGun->SetParticleEnergy(0*eV);
+     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,20*cm));
+     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
 
-     gunMessenger =  new G4GenericMessenger(fParticleGun,"/gun/","Change Momentum");
-     gunMessenger->DeclareProperty("momentum",mom,"momentum of particle");
  }
  
 
   MyPrimaryGenerator::~MyPrimaryGenerator() //delete particle
  {
-   delete fParticleGun; //nu vrea sa imi vada pointerul de la messenger?
+   delete fParticleGun;
  }
  
 

@@ -9,7 +9,7 @@
 
 #include "construction.hh"
 #include "physics.hh"
-#include "action.hh"
+#include "ActionInitialization.hh"
 
 
 int main(int argc, char **argv) {

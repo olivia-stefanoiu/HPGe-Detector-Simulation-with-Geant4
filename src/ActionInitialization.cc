@@ -1,4 +1,4 @@
-#include "action.hh"
+#include "ActionInitialization.hh"
 
 MyActionInitialization::MyActionInitialization() {}
 

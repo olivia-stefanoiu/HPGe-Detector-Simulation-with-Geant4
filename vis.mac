@@ -16,6 +16,7 @@
 /vis/viewer/set/style wireframe
 /vis/viewer/set/auxiliaryEdge true
 /vis/viewer/set/lineSegmentsPerCircle 100
+# /vis/modeling/trajectories/drawByParticleID-0/set gamma green
 
 # Draw smooth trajectories at end of event, showing trajectory points
 # as markers 2 pixels wide:
@@ -31,7 +32,7 @@
 
 # Axes, scale, etc.
 /vis/scene/add/scale   # Simple scale line
-#/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
+/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
 
 
 /vis/geometry/set/visibility World 0 false
@@ -49,9 +50,9 @@
 
 
 #Germanium Crystal
-/vis/geometry/set/colour logicGeUnion 0 192 192 192 .3
-/vis/viewer/set/style surface
-/vis/viewer/set/hiddenMarker true
+#/vis/geometry/set/colour logicGeUnion 0 192 192 192 .3
+#/vis/viewer/set/style surface
+#/vis/viewer/set/hiddenMarker true
 
 #Germanium Inactive
 /vis/geometry/set/colour logicInactiveGe 0 0 1 0 .3
@@ -59,7 +60,7 @@
 /vis/viewer/set/hiddenMarker true
 
 #Bor
-/vis/geometry/set/colour logicBorUnion 0 0 0 0 .1
+/vis/geometry/set/colour logicBorUnion 0 0 0 0 .3
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
@@ -67,6 +68,12 @@
 /vis/geometry/set/colour logicAlFoil 0 1 1 1 .3
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
+
+#Li
+/vis/geometry/set/colour logicLiUnion 0 120 0 0 .3
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenMarker true
+
 
 # Re-establish auto refreshing and verbosity:
 /vis/viewer/set/autoRefresh true

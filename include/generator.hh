@@ -24,9 +24,7 @@ class MyPrimaryGenerator : public G4VUserPrimaryGeneratorAction
 
      G4ParticleGun *fParticleGun=nullptr;
 
-     G4GenericMessenger *gunMessenger=nullptr;
-     G4ThreeVector pos,pos_mom;
-     G4double mom;
+
 
     G4String particleName;
 };
