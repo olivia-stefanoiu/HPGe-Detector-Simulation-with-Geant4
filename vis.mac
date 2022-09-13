@@ -44,7 +44,7 @@
 
 
 # Copper
-/vis/geometry/set/colour logicCu 0 255 140 0 .3
+/vis/geometry/set/colour logicCu 0 255 140 0 .6
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
@@ -55,25 +55,24 @@
 #/vis/viewer/set/hiddenMarker true
 
 #Germanium Inactive
-/vis/geometry/set/colour logicInactiveGe 0 0 1 0 .3
+/vis/geometry/set/colour logicInactiveGe 0 0 1 0 .6
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
 #Bor
-/vis/geometry/set/colour logicBorUnion 0 0 0 0 .3
+/vis/geometry/set/colour logicBorUnion 0 0 0 0 .5
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
 #Aluminum foil
-/vis/geometry/set/colour logicAlFoil 0 1 1 1 .3
+/vis/geometry/set/colour logicAlFoil 0 180 2 0 .5
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
 #Li
-/vis/geometry/set/colour logicLiUnion 0 120 0 0 .3
+/vis/geometry/set/colour logicLiUnion 0 120 0 0 .5
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
-
 
 
 

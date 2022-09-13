@@ -50,9 +50,9 @@ protected:
             *logicBorUnion = nullptr,
             *logicInactiveGe = nullptr,
             *logicAlFoil = nullptr,
-            *logicLiUnion,
+            *logicLiUnion = nullptr,
             *logicAlCapUnion,
-            *logicLi;
+            *logicAlCupUnion;
 
     G4Box *solidRadiator = nullptr,
             *solidWorld = nullptr,
@@ -69,7 +69,9 @@ protected:
             *solidLi = nullptr,
             *solidLiFill = nullptr,
             *solidAlCap,
-            *solidAlCapFill;
+            *solidAlCapFill,
+            *solidAlCupFill,
+            *solidAlCup;
 
     G4GenericMessenger *fMessenger;
 
@@ -86,7 +88,8 @@ protected:
             *solidGeUnion = nullptr,
             *solidBorUnion = nullptr,
             *solidLiUnion = nullptr,
-            *solidAlCapUnion;
+            *solidAlCapUnion,
+            *solidAlCupUnion;
 
 
     void DefineMaterials();
