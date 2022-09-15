@@ -42,6 +42,7 @@ protected:
     G4bool checkOverlaps = true;
 
     G4LogicalVolume *fScoringVolume = nullptr,
+
             *logicWorld = nullptr,
             *logicEnv = nullptr,
             *logicRadiator = nullptr,

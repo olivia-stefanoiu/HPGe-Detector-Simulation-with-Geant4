@@ -5,13 +5,14 @@ MyActionInitialization::MyActionInitialization() {}
 MyActionInitialization::~MyActionInitialization() {}
 
 void MyActionInitialization::BuildForMaster() const {
-    MyRunAction *runAction = new MyRunAction();
+    auto *runAction = new MyRunAction();
     SetUserAction(runAction);
 }
 
 void MyActionInitialization::Build() const {
 
-    SetUserAction(new MyPrimaryGenerator);
+    auto *generator = new MyPrimaryGenerator();
+    SetUserAction(generator);
 
     auto *runAction = new MyRunAction();
     SetUserAction(runAction);

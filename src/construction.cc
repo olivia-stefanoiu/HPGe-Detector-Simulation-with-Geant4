@@ -107,7 +107,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
             new G4LogicalVolume(solidRadiator,            //its solid
                                 radiator_mat,             //its material
                                 "logicRadiator");         //its name
-
+/*
     new G4PVPlacement(0,                       //no rotation
                       G4ThreeVector(0, 0, 55.15* mm),         //at (0,0,0)
                       logicRadiator,                //its logical volume
@@ -117,7 +117,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
 
-
+*/
     //Copper contact pin
     //
     solidCu =
@@ -378,7 +378,6 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
     //Alluminum cap
     //
-
     solidAlCap =
             new G4Tubs("solidAlCap",
                        46.2*mm,
@@ -424,6 +423,8 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,
                       checkOverlaps);
 
+    fScoringVolume=logicGeUnion;
+
 
 
     return physWorld;
@@ -431,10 +432,11 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
 void MyDetectorConstruction::ConstructSDandField()
 {
-    auto *sensDet = new MySensitiveDetector("SensitiveDetector");
+    auto *sensDet = new MySensitiveDetector("logicGeUnion");
 
-    if(logicCu != nullptr)
-        logicCu->SetSensitiveDetector(sensDet);
+    //if(logicGeUnion != nullptr)
+       // fScoringVolume=logicGeUnion;
+        logicGeUnion->SetSensitiveDetector(sensDet);
 
 }
 

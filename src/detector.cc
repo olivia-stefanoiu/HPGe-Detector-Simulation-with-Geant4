@@ -9,7 +9,7 @@ MySensitiveDetector::~MySensitiveDetector() {}
 G4bool MySensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist) {
 
     G4Track *track = aStep->GetTrack();
-    track->SetTrackStatus(fStopAndKill);
+    //track->SetTrackStatus(fStopAndKill);
 
 
     G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
@@ -23,15 +23,13 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhis
 
     const G4VTouchable *touchable = aStep->GetPreStepPoint()->GetTouchable();
 
-    G4int copyNo = touchable->GetCopyNumber(); //copy number construction
+   // G4int copyNo = touchable->GetCopyNumber(); //copy number construction for unique identifiers on detector
 
     // G4cout << "Copy number of detector: "<< copyNo << G4endl; //display copy Number(the number of the detector that fired- mapping of touches)
 
 
     G4VPhysicalVolume *physVol = touchable->GetVolume(); // access the real pos.
     G4ThreeVector posDetector = physVol->GetTranslation();// get the exact position of the detectors/voxels
-
-    G4cout << "Detector Position: " << posDetector << G4endl; //display the real pos.
 
     G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
 

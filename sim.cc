@@ -15,8 +15,8 @@
 int main(int argc, char **argv) {
     auto *runManager = new G4RunManager();
 
-    runManager->SetUserInitialization(new MyDetectorConstruction()); //use created geometry... detector construction
-    runManager->SetUserInitialization(new MyPhysicsList()); //use created list... Physics list with prop.
+    runManager->SetUserInitialization(new MyDetectorConstruction());
+    runManager->SetUserInitialization(new MyPhysicsList());
 
     runManager->SetUserInitialization(new MyActionInitialization()); //use particle init.
 

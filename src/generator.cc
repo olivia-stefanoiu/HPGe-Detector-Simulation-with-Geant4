@@ -13,7 +13,7 @@
      fParticleGun->SetParticleDefinition(particle);
 
      fParticleGun->SetParticleEnergy(0*eV);
-     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,20*cm));
+     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,70.*mm));
      fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
 
  }
