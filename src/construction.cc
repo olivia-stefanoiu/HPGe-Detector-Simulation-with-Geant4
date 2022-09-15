@@ -107,9 +107,9 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
             new G4LogicalVolume(solidRadiator,            //its solid
                                 radiator_mat,             //its material
                                 "logicRadiator");         //its name
-/*
+
     new G4PVPlacement(0,                       //no rotation
-                      G4ThreeVector(0, 0, 55.15* mm),         //at (0,0,0)
+                      G4ThreeVector(0, 0, 60.15* mm),         //at (0,0,0)
                       logicRadiator,                //its logical volume
                       "physRadiator",              //its name
                       logicEnv,              //its mother  volume
@@ -117,7 +117,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
 
-*/
+
     //Copper contact pin
     //
     solidCu =
@@ -256,7 +256,6 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
     //Li
     //
-
     solidLi =
             new G4Tubs("solidLi",
                        41. * mm,

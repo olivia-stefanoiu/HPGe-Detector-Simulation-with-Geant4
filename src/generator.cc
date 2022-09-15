@@ -1,5 +1,7 @@
  #include "generator.hh"
 
+#include "G4RandomDirection.hh"
+
  
  MyPrimaryGenerator::MyPrimaryGenerator()
  {
@@ -10,10 +12,10 @@
 
      particleName="geantino";
      G4ParticleDefinition *particle = particleTable->FindParticle(particleName);
-     fParticleGun->SetParticleDefinition(particle);
 
-     fParticleGun->SetParticleEnergy(0*eV);
-     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,70.*mm));
+     fParticleGun->SetParticleDefinition(particle);
+     fParticleGun->SetParticleEnergy(1*MeV);
+     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,75.*mm));
      fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
 
  }
@@ -43,6 +45,15 @@
 
 
      }
+
+     G4double cosTheta = 2*G4UniformRand() - 1., phi = CLHEP::twopi*G4UniformRand();
+     G4double sinTheta = std::sqrt(1. - cosTheta*cosTheta);
+     G4double ux = sinTheta*std::cos(phi),
+             uy = sinTheta*std::sin(phi),
+             uz = cosTheta;
+
+     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(ux,uy,uz));
+
 
      fParticleGun->GeneratePrimaryVertex(anEvent);
  }
