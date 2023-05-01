@@ -1,4 +1,3 @@
-//clip8 stocare date(hits data ) intr-un Root file
 #ifndef RUN_HH
 #define RUN_HH
 

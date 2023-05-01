@@ -16,24 +16,24 @@ public:
     MyPhysicsList();
 
     ~MyPhysicsList() override;
-/*
-protected:
-    // Construct particle and physics
-    virtual void ConstructParticle();
-    virtual void ConstructProcess();
+//
+//protected:
+//    // Construct particle and physics
+//    virtual void ConstructParticle();
+//    virtual void ConstructProcess();
+//
+//    virtual void SetCuts();
 
-    virtual void SetCuts();
-
-protected:
-    // these methods Construct particles
-    void ConstructBosons();
-    void ConstructLeptons();
+//protected:
+//    // these methods Construct particles
+//    void ConstructBosons();
+//    void ConstructLeptons();
 
 protected:
     // these methods Construct physics processes and register them
-    void ConstructGeneral();
+  //  void ConstructGeneral();
     void ConstructEM();
-    */
+
 };
 
 #endif

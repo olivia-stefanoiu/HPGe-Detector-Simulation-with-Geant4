@@ -42,7 +42,7 @@ void MyDetectorConstruction::DefineMaterials() {
 
     world_mat = nist->FindOrBuildMaterial("G4_AIR");
     env_mat = nist->FindOrBuildMaterial("G4_AIR");
-    radiator_mat = nist->FindOrBuildMaterial("G4_Al");
+    radiator_mat = nist->FindOrBuildMaterial("G4_Fe");
 
 }
 
@@ -94,10 +94,58 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
 
-    //
-    //Radiator
 
-    G4double plate_sizeXY = 10 * cm, plate_sizeZ = 1.5 * cm;
+/////////////////////////////////////////////////////////////////////////////////////////////PMT
+//
+//    solidPMT = new G4Tubs("solidPMT",
+//                          0 * mm,
+//                          51 * mm,
+//                          66 * mm,
+//                          0. * deg,
+//                          360. * deg);
+//
+//    logicPMT =
+//            new G4LogicalVolume(solidPMT,
+//                                nist->FindOrBuildMaterial("G4_Cs"),
+//                                "logicPMT");
+//    new G4PVPlacement(0,
+//                      G4ThreeVector(),
+//                      logicPMT,
+//                      "physPMT",
+//                      logicEnv,
+//                      false,
+//                      0,
+//                      checkOverlaps);
+
+    //EPOXY
+
+//    solidEpoxy = new G4Tubs("solidEpoxy",
+//                          0 * mm,
+//                          58.8 * mm,
+//                          0.5 * mm,
+//                          0. * deg,
+//                          360. * deg);
+//
+//    logicEpoxy =
+//            new G4LogicalVolume(solidPMT,
+//                                nist->FindOrBuildMaterial("G4_Cs"),
+//                                "logicPMT");
+//    new G4PVPlacement(0,
+//                      G4ThreeVector(0,0,100.5*mm),
+//                      logicEpoxy,
+//                      "physEpoxy",
+//                      logicEnv,
+//                      false,
+//                      0,
+//                      checkOverlaps);
+//
+//
+//
+
+
+    // Radiator
+
+    G4double plate_sizeXY = 100 * mm, plate_sizeZ = 0.5 * mm;
 
     solidRadiator =
             new G4Box("solidRadiator",                    //its name
@@ -109,7 +157,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
                                 "logicRadiator");         //its name
 
     new G4PVPlacement(0,                       //no rotation
-                      G4ThreeVector(0, 0, 60.15* mm),         //at (0,0,0)
+                      G4ThreeVector(0, 0, (93.15-plate_sizeZ*0.5)* mm),         //at (0,0,0)
                       logicRadiator,                //its logical volume
                       "physRadiator",              //its name
                       logicEnv,              //its mother  volume
@@ -119,7 +167,7 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
 
 
     //Copper contact pin
-    //
+
     solidCu =
             new G4Tubs("solidCu",
                        0 * mm,
@@ -429,13 +477,12 @@ G4VPhysicalVolume *MyDetectorConstruction::DefineVolumes() {
     return physWorld;
 }
 
-void MyDetectorConstruction::ConstructSDandField()
-{
+void MyDetectorConstruction::ConstructSDandField() {
     auto *sensDet = new MySensitiveDetector("logicGeUnion");
 
     //if(logicGeUnion != nullptr)
-       // fScoringVolume=logicGeUnion;
-        logicGeUnion->SetSensitiveDetector(sensDet);
+    // fScoringVolume=logicGeUnion;
+    logicGeUnion->SetSensitiveDetector(sensDet);
 
 }
 

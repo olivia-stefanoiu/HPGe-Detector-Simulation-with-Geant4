@@ -92,6 +92,14 @@ protected:
             *solidAlCapUnion,
             *solidAlCupUnion;
 
+//    G4Tubs *solidPMT = nullptr,
+//           *solidEpoxy = nullptr,
+//           *solidBase = nullptr;
+//
+//    G4LogicalVolume *logicPMT = nullptr,
+//                    *logicEpoxy = nullptr,
+//                    *logicBase = nullptr;
+
 
     void DefineMaterials();
 

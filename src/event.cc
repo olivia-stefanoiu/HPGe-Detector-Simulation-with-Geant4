@@ -13,7 +13,7 @@ void MyEventAction::BeginOfEventAction(const G4Event *) {
 }
 
 void MyEventAction::EndOfEventAction(const G4Event *) {
-    G4cout << "Energia depozitata: " << fEdep << G4endl;
+//    G4cout << "Energia depozitata: " << fEdep << G4endl;
     fRunAction->AddEdepTotal(fEdep);
 
 

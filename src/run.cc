@@ -31,7 +31,7 @@ void MyRunAction::BeginOfRunAction(const G4Run *run) {
     std::stringstream strRunID;
     strRunID << runID;
 
-    man->OpenFile("output" + strRunID.str() + ".root");
+    man->OpenFile("output" + strRunID.str() + ".xml");
 
     G4AccumulableManager *accumulableManager = G4AccumulableManager::Instance();
     accumulableManager->Reset();

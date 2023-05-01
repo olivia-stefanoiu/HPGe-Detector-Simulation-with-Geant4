@@ -16,7 +16,7 @@
 /vis/viewer/set/style wireframe
 /vis/viewer/set/auxiliaryEdge true
 /vis/viewer/set/lineSegmentsPerCircle 100
-# /vis/modeling/trajectories/drawByParticleID-0/set gamma green
+#/vis/modeling/trajectories/drawByParticleID-0/set gamma green
 
 # Draw smooth trajectories at end of event, showing trajectory points
 # as markers 2 pixels wide:
@@ -32,7 +32,7 @@
 
 # Axes, scale, etc.
 /vis/scene/add/scale   # Simple scale line
-/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
+#/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
 
 
 /vis/geometry/set/visibility World 0 false
