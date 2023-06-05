@@ -28,20 +28,10 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhis
     // G4cout << "Copy number of detector: "<< copyNo << G4endl; //display copy Number(the number of the detector that fired- mapping of touches)
 
 
-    G4VPhysicalVolume *physVol = touchable->GetVolume(); // access the real pos.
-    G4ThreeVector posDetector = physVol->GetTranslation();// get the exact position of the detectors/voxels
+//    G4VPhysicalVolume *physVol = touchable->GetVolume(); // access the real pos.
+//    G4ThreeVector posDetector = physVol->GetTranslation();// get the exact position of the detectors/voxels
 
-    G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
 
-    G4AnalysisManager *man = G4AnalysisManager::Instance();
-
-    man->FillNtupleIColumn(0, evt);
-
-    man->FillNtupleDColumn(1, posDetector[0]);
-    man->FillNtupleDColumn(2, posDetector[1]);
-    man->FillNtupleDColumn(3, posDetector[2]);
-
-    man->AddNtupleRow(0);
 
     return true;
 }

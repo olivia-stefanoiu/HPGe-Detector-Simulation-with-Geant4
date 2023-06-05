@@ -24,6 +24,9 @@ public:
 
 private:
     G4Accumulable<G4double> fEdepTotal = 0.;
+    G4double myArray[300]={0};
+
+
 };
 
 #endif

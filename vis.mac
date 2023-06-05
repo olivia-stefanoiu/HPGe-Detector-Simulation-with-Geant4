@@ -24,14 +24,14 @@
 /vis/modeling/trajectories/create/drawByCharge
 /vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
 /vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
-# (if too many tracks cause core dump => /tracking/storeTrajectory 0)
+/tracking/storeTrajectory 0
 
 /vis/scene/endOfEventAction accumulate
 
 
 
 # Axes, scale, etc.
-/vis/scene/add/scale   # Simple scale line
+#/vis/scene/add/scale   # Simple scale line
 #/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
 
 
@@ -43,38 +43,25 @@
 /vis/viewer/set/hiddenMarker true
 
 
-# Copper
-/vis/geometry/set/colour logicCu 0 255 140 0 .6
+#Epoxy
+/vis/geometry/set/colour logicEpoxy 0 255 140 0 .6
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
-
-#Germanium Crystal
-#/vis/geometry/set/colour logicGeUnion 0 192 192 192 .3
-#/vis/viewer/set/style surface
-#/vis/viewer/set/hiddenMarker true
-
-#Germanium Inactive
-/vis/geometry/set/colour logicInactiveGe 0 0 1 0 .6
+#PMT
+/vis/geometry/set/colour logicPMT 0 192 192 192 .3
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
-#Bor
-/vis/geometry/set/colour logicBorUnion 0 0 0 0 .5
+#Magnetic
+/vis/geometry/set/colour logicMagnetic  0 120 0 0 .3
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
 
-#Aluminum foil
-/vis/geometry/set/colour logicAlFoil 0 180 2 0 .5
+#Radiator
+/vis/geometry/set/colour logicRadiator  0 0 0 0 .3
 /vis/viewer/set/style surface
 /vis/viewer/set/hiddenMarker true
-
-#Li
-/vis/geometry/set/colour logicLiUnion 0 120 0 0 .5
-/vis/viewer/set/style surface
-/vis/viewer/set/hiddenMarker true
-
-
 
 # Re-establish auto refreshing and verbosity:
 /vis/viewer/set/autoRefresh true

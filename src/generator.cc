@@ -3,7 +3,7 @@
 
  MyPrimaryGenerator::MyPrimaryGenerator()
  {
-     G4int nr_particles=1;
+     G4int nr_particles=10;
      fParticleGun = new G4ParticleGun(nr_particles);
 
      G4ParticleTable *particleTable = G4ParticleTable::GetParticleTable();
@@ -12,8 +12,8 @@
      G4ParticleDefinition *particle = particleTable->FindParticle(particleName);
 
      fParticleGun->SetParticleDefinition(particle);
-     fParticleGun->SetParticleEnergy(100*keV);
-     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,93.15*mm));
+     fParticleGun->SetParticleEnergy(900*keV);
+     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,140*mm));
      fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,-1.));
 
  }

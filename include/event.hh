@@ -19,6 +19,7 @@ public:
     void EndOfEventAction(const G4Event *) override;
 
     void AddEdep(G4double edep) {
+        //G4cout<<"ABAAC"<<edep<<'\n';
         fEdep += edep;
         fEdeptTotal += edep;
     }
